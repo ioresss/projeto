@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Funcionarios</title>
+</h:head>
+<h:body>
+	<ui:include src="/menu.xhtml" />
+	<h:form>
+		<p:panel header="Cadastro de Funcionários">
+			<p:messages closable="true">
+				<p:autoUpdate></p:autoUpdate>
+			</p:messages>
+			<h:panelGrid columns="4" id="painelDados">
+				<p:outputLabel value="Matricula" />
+				<p:inputText size="8"
+					value="#{funcionarioBean.funcionario.matricula}" />
+				<p:outputLabel value="Nome" />
+				<p:inputText maxlength="50" size="25"
+					value="#{funcionarioBean.funcionario.nome}"  />
+					<p:outputLabel value="CPF" />
+				<p:inputMask maxlength="11" size="14" mask="999.999.999-99"
+					value="#{funcionarioBean.funcionario.cpf}"  />
+					<p:outputLabel value="telefone" />
+				<p:inputMask maxlength="11" size="14" mask="(99)99999-9999"
+					value="#{funcionarioBean.funcionario.telefone}"  />
+			</h:panelGrid>
+
+
+			<h:panelGrid columns="1">
+				<p:commandButton value="Cadastrar"
+					actionListener="#{funcionarioBean.salvar()}" update="painelDados tabela" />
+			</h:panelGrid>
+
+			<p:separator />
+
+			<p:dataTable emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{funcionarioBean.funcionarios}" var="indice"
+				id="tabela">
+				<p:column headerText="#">
+					#{indice.matricula}
+				</p:column>
+				<p:column headerText="nome">
+					#{indice.nome}
+				</p:column>
+				<p:column headerText="CPF">
+					#{indice.cpf}
+				</p:column>
+				<p:column headerText="Telefone">
+					#{indice.telefone}
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
